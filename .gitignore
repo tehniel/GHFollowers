@@ -1,0 +1,44 @@
+# Xcode project workspace settings
+*.xcworkspace/
+xcuserdata/
+UserInterfaceState.xcuserstate
+
+# Build artifacts
+DerivedData/
+build/
+*.ipa
+*.xcarchive
+
+# CocoaPods
+Pods/
+*.lock
+pod_install.log
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+/.swiftpm/
+/Package.resolved
+
+# Xcode specific
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Ignore environment files
+.env
+*.env
+
+# Ignore Secrets
+*.xcconfig
+
+# Ignore Playgrounds
+timeline.xctimeline
+playground.xcworkspace
