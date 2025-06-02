@@ -1,5 +1,5 @@
 //
-//  ErrorMessage.swift
+//  GHError.swift
 //  GHFollowers
 //
 //  Created by Daniel Ruiz on 1/14/25.
