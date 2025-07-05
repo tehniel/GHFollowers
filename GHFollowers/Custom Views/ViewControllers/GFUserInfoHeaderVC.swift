@@ -37,9 +37,7 @@ class GFUserInfoHeaderVC: UIViewController {
     }
     
     func addSubviews() {
-        [avatarImageView, usernameLabel, nameLabel, locationImageView, locationLabel, bioLabel].forEach {
-            view.addSubview($0)
-        }
+        // Stack views will handle adding subviews
     }
     
     func configureUIElements() {
@@ -55,40 +53,49 @@ class GFUserInfoHeaderVC: UIViewController {
     }
     
     func layoutUI() {
-        
         let padding: CGFloat = 20
         let textImagePadding: CGFloat = 12
-        locationImageView.translatesAutoresizingMaskIntoConstraints = false
         
+        // Location stack (icon + label)
+        let locationStack = UIStackView(arrangedSubviews: [locationImageView, locationLabel])
+        locationStack.axis = .horizontal
+        locationStack.spacing = 5
+        locationStack.alignment = .center
+        
+        // Right side stack (username, name, location)
+        let rightStack = UIStackView(arrangedSubviews: [usernameLabel, nameLabel, locationStack])
+        rightStack.axis = .vertical
+        rightStack.spacing = 8
+        rightStack.alignment = .leading
+        rightStack.distribution = .fillProportionally
+        
+        // Top horizontal stack (avatar + right content)
+        let topStack = UIStackView(arrangedSubviews: [avatarImageView, rightStack])
+        topStack.axis = .horizontal
+        topStack.spacing = textImagePadding
+        topStack.alignment = .top
+        
+        // Main vertical stack (top content + bio)
+        let mainStack = UIStackView(arrangedSubviews: [topStack, bioLabel])
+        mainStack.axis = .vertical
+        mainStack.spacing = textImagePadding
+        mainStack.alignment = .fill
+        
+        view.addSubview(mainStack)
+        mainStack.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Set fixed size constraints
         NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 90),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 90),
+            avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor),
+            avatarImageView.heightAnchor.constraint(equalTo: rightStack.heightAnchor),
             
-            usernameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
-            usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: textImagePadding),
-            usernameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            
-            nameLabel.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor, constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: textImagePadding),
-            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            
-            locationImageView.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
-            locationImageView.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: textImagePadding),
             locationImageView.widthAnchor.constraint(equalToConstant: 20),
             locationImageView.heightAnchor.constraint(equalToConstant: 20),
             
-            locationLabel.centerYAnchor.constraint(equalTo: locationImageView.centerYAnchor),
-            locationLabel.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: 5),
-            locationLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            
-            bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
-            bioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
-            bioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            mainStack.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            mainStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            mainStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
-        
-        
     }
     
 }
