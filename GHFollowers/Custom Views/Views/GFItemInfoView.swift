@@ -12,7 +12,7 @@ enum ItemInfoType {
 }
 
 class GFItemInfoView: UIView {
-
+    
     let symboleImageView = UIImageView()
     let titleLabel = GFTitleLabel(textAlignment: .left, fontSize: 14)
     let countLabel = GFTitleLabel(textAlignment: .center, fontSize: 14)
@@ -54,27 +54,23 @@ class GFItemInfoView: UIView {
             countLabel.heightAnchor.constraint(equalToConstant: 18),
             
         ])
-        
-        func set(itemInfoType: ItemInfoType, withCount count: Int){
-            switch itemInfoType {
-            case .repos:
-                symboleImageView.image = UIImage(systemName: SFSymbols.repos)
-                titleLabel.text = "Public Repos"
-            case .gist:
-                symboleImageView.image = UIImage(systemName: SFSymbols.gist)
-                titleLabel.text = "Public gist"
-            case .followers:
-                symboleImageView.image = UIImage(systemName: SFSymbols.follwers)
-                titleLabel.text = "Followers"
-            case .following:
-                symboleImageView.image = UIImage(systemName: SFSymbols.following)
-                titleLabel.text = "Following"
-            }
-            countLabel.text = String(count)
-        }
-        
     }
     
-
-
+    func set(itemInfoType: ItemInfoType, withCount count: Int){
+        switch itemInfoType {
+        case .repos:
+            symboleImageView.image = UIImage(systemName: SFSymbols.repos)
+            titleLabel.text = "Public Repos"
+        case .gist:
+            symboleImageView.image = UIImage(systemName: SFSymbols.gist)
+            titleLabel.text = "Public gist"
+        case .followers:
+            symboleImageView.image = UIImage(systemName: SFSymbols.follwers)
+            titleLabel.text = "Followers"
+        case .following:
+            symboleImageView.image = UIImage(systemName: SFSymbols.following)
+            titleLabel.text = "Following"
+        }
+        countLabel.text = String(count)
+    }
 }
